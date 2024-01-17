@@ -40,7 +40,7 @@ class BasicFleetTheme {
       ),
       appBarTheme: const AppBarTheme(
         foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 240, 240, 240),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
@@ -48,6 +48,9 @@ class BasicFleetTheme {
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.green,
+      ),
+      textSelectionTheme: const TextSelectionThemeData(
+        selectionColor: Colors.black,
       ),
       textTheme: lightTextTheme,
     );

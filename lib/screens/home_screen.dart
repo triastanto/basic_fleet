@@ -24,24 +24,76 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               hintText: 'Enter a search term',
             ),
           ),
-          Container(
-            child: TabBar(
+          TabBar(
+            controller: tabController,
+            tabs: const [
+              Tab(text: "Sekali Jalan"),
+              Tab(text: "Pulang Pergi"),
+            ],
+          ),
+          SizedBox(
+            width: double.maxFinite,
+            height: 150,
+            child: TabBarView(
               controller: tabController,
-              tabs: [
-                Tab(text: "Sekali Jalan"),
-                Tab(text: "Pulang Pergi"),
+              children: const [
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Waktu berangkat',
+                          ),
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Waktu pulang',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Waktu berangkat',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          Container(
-            width: double.maxFinite,
-            height: 300,
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                Text("sekali jalan content"),
-                Text("pulang pergi content"),
-              ],
+          const TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Titik penjemputan',
+            ),
+          ),
+          const TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Destinasi Tujuan',
+            ),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.blue,
+            ),
+            onPressed: () {},
+            child: const Text(
+              'Kirim Pemesanan',
+              // style: TextStyle(color: Colors.black),
             ),
           ),
         ],

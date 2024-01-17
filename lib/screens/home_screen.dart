@@ -8,8 +8,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  DateTime dateTime = DateTime(2024, 01, 16, 5, 30);
+
   @override
   Widget build(BuildContext context) {
+    final hours = dateTime.hour.toString().padLeft(2, '0');
+    final minutes = dateTime.minute.toString().padLeft(2, '0');
+
     TabController tabController = TabController(length: 2, vsync: this);
     return Container(
       color: const Color.fromARGB(2525, 240, 240, 240),
@@ -36,18 +41,49 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             height: 150,
             child: TabBarView(
               controller: tabController,
-              children: const [
+              children: [
                 Column(
                   children: [
                     Column(
                       children: [
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Waktu berangkat',
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () async {
+                                final date = await pickDate();
+                                if (date == null) return;
+                                final newDateTime = DateTime(
+                                  date.year,
+                                  date.month,
+                                  date.day,
+                                  dateTime.hour,
+                                  dateTime.minute,
+                                );
+                                setState(() => dateTime = newDateTime);
+                              },
+                              child: Text(
+                                  '${dateTime.year}-${dateTime.month}-${dateTime.day}'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () async {
+                                final time = await pickTime();
+                                if (time == null) return;
+                                final newDateTime = DateTime(
+                                  dateTime.year,
+                                  dateTime.month,
+                                  dateTime.day,
+                                  time.hour,
+                                  time.minute,
+                                );
+                                setState(() => dateTime = newDateTime);
+                              },
+                              child:
+                                  Text('$hours:$minutes'),
+                            ),
+                          ],
                         ),
-                        TextField(
+                        const TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Waktu pulang',
@@ -57,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                Column(
+                const Column(
                   children: [
                     Column(
                       children: [
@@ -86,10 +122,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               hintText: 'Destinasi Tujuan',
             ),
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.blue,
-            ),
+          ElevatedButton(
             onPressed: () {},
             child: const Text(
               'Kirim Pemesanan',
@@ -100,4 +133,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
     );
   }
+
+  Future<DateTime?> pickDate() => showDatePicker(
+        context: context,
+        firstDate: dateTime,
+        lastDate: DateTime(2025),
+      );
+
+  Future<TimeOfDay?> pickTime() => showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(
+          hour: dateTime.hour,
+          minute: dateTime.minute,
+        ),
+      );
 }

@@ -12,6 +12,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final day = dateTime.day.toString().padLeft(2, '0');
+    final month = dateTime.month.toString().padLeft(2, '0');
     final hours = dateTime.hour.toString().padLeft(2, '0');
     final minutes = dateTime.minute.toString().padLeft(2, '0');
 
@@ -50,36 +52,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton(
-                              onPressed: () async {
-                                final date = await pickDate();
-                                if (date == null) return;
-                                final newDateTime = DateTime(
-                                  date.year,
-                                  date.month,
-                                  date.day,
-                                  dateTime.hour,
-                                  dateTime.minute,
-                                );
-                                setState(() => dateTime = newDateTime);
-                              },
+                              onPressed: pickDateTime,
                               child: Text(
-                                  '${dateTime.year}-${dateTime.month}-${dateTime.day}'),
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                final time = await pickTime();
-                                if (time == null) return;
-                                final newDateTime = DateTime(
-                                  dateTime.year,
-                                  dateTime.month,
-                                  dateTime.day,
-                                  time.hour,
-                                  time.minute,
-                                );
-                                setState(() => dateTime = newDateTime);
-                              },
-                              child:
-                                  Text('$hours:$minutes'),
+                                '$day/$month/${dateTime.year} $hours:$minutes',
+                              ),
                             ),
                           ],
                         ),
@@ -136,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Future<DateTime?> pickDate() => showDatePicker(
         context: context,
-        firstDate: dateTime,
+        firstDate: DateTime(2024),
         lastDate: DateTime(2025),
       );
 
@@ -147,4 +123,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           minute: dateTime.minute,
         ),
       );
+
+  Future pickDateTime() async {
+    DateTime? date = await pickDate();
+    if (date == null) return;
+
+    TimeOfDay? time = await pickTime();
+    if (time == null) return;
+
+    final dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+
+    setState(() => this.dateTime = dateTime);
+  }
 }

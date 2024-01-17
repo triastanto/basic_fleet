@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/date_time_button.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -8,14 +10,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  DateTime dateTime = DateTime(2024, 01, 16, 5, 30);
 
   @override
   Widget build(BuildContext context) {
-    final day = dateTime.day.toString().padLeft(2, '0');
-    final month = dateTime.month.toString().padLeft(2, '0');
-    final hours = dateTime.hour.toString().padLeft(2, '0');
-    final minutes = dateTime.minute.toString().padLeft(2, '0');
 
     TabController tabController = TabController(length: 2, vsync: this);
     return Container(
@@ -43,23 +40,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             height: 150,
             child: TabBarView(
               controller: tabController,
-              children: [
+              children: const [
                 Column(
                   children: [
                     Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: pickDateTime,
-                              child: Text(
-                                '$day/$month/${dateTime.year} $hours:$minutes',
-                              ),
-                            ),
-                          ],
-                        ),
-                        const TextField(
+                        DateTimeButton(),
+                        TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Waktu pulang',
@@ -69,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                const Column(
+                Column(
                   children: [
                     Column(
                       children: [
@@ -108,37 +95,5 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ],
       ),
     );
-  }
-
-  Future<DateTime?> pickDate() => showDatePicker(
-        context: context,
-        firstDate: DateTime(2024),
-        lastDate: DateTime(2025),
-      );
-
-  Future<TimeOfDay?> pickTime() => showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(
-          hour: dateTime.hour,
-          minute: dateTime.minute,
-        ),
-      );
-
-  Future pickDateTime() async {
-    DateTime? date = await pickDate();
-    if (date == null) return;
-
-    TimeOfDay? time = await pickTime();
-    if (time == null) return;
-
-    final dateTime = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-
-    setState(() => this.dateTime = dateTime);
   }
 }

@@ -10,10 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-
   @override
   Widget build(BuildContext context) {
-
     TabController tabController = TabController(length: 2, vsync: this);
     return Container(
       color: const Color.fromARGB(2525, 240, 240, 240),
@@ -42,32 +40,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               controller: tabController,
               children: const [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Column(
-                      children: [
-                        DateTimeButton(),
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Waktu pulang',
-                          ),
-                        ),
-                      ],
-                    ),
+                    DateTimeButton(),
+                    DateTimeButton(),
                   ],
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Column(
-                      children: [
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Waktu berangkat',
-                          ),
-                        ),
-                      ],
-                    ),
+                    DateTimeButton(),
                   ],
                 ),
               ],

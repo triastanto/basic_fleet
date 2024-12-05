@@ -34,13 +34,13 @@ class BasicFleetTheme {
     return ThemeData(
       brightness: Brightness.light,
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateColor.resolveWith((states) {
+        fillColor: WidgetStateColor.resolveWith((states) {
           return Colors.black;
         }),
       ),
       appBarTheme: const AppBarTheme(
         foregroundColor: Colors.black,
-        backgroundColor: Color.fromARGB(255, 240, 240, 240),
+        backgroundColor: Colors.white,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,

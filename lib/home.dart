@@ -13,7 +13,7 @@ class HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   static List<Widget> pages = <Widget>[
-    HomeScreen(),
+    const HomeScreen(),
     Container(color: Colors.blue),
   ];
 
@@ -31,16 +31,16 @@ class HomeState extends State<Home> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.featured_play_list),
-          label: 'Order',
-        ),
-      ],
-      ), 
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_filled),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.featured_play_list),
+            label: 'Order',
+          ),
+        ],
+      ),
     );
   }
 }

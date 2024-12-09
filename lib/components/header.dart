@@ -10,26 +10,17 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Halo, $name',
-          style: const TextStyle(
-            color: Color(0xFF080A24),
-            fontSize: 18,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w400,
-          ),
+          style: theme.textTheme.displayMedium,
         ),
-        const Text(
+        Text(
           'SILAHKAN LAKUKAN PEMESANAN DISINI',
-          style: TextStyle(
-            color: Color(0xFF080A24),
-            fontSize: 26,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w700,
-          ),
+          style: theme.textTheme.displayLarge,
         ),
       ],
     );

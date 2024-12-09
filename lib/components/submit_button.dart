@@ -10,23 +10,22 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Center(
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
+          backgroundColor: theme.floatingActionButtonTheme.backgroundColor,
           minimumSize: const Size(201, 38),
           shape: RoundedRectangleBorder(
             side: const BorderSide(width: 1),
             borderRadius: BorderRadius.circular(6),
           ),
         ),
-        child: const Text(
+        child: Text(
           'KIRIM PEMESANAN',
-          style: TextStyle(
+          style: theme.textTheme.bodyLarge?.copyWith(
             color: Colors.white,
-            fontSize: 14,
-            fontFamily: 'Poppins',
             fontWeight: FontWeight.w400,
           ),
         ),

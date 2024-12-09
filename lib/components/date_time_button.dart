@@ -45,7 +45,7 @@ class DateTimeButtonState extends State<DateTimeButton> {
           alignment: Alignment.centerLeft,
           child: Text(
             displayText,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
       ),

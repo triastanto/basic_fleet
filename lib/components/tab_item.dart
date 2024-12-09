@@ -12,6 +12,7 @@ class TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Tab(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -20,25 +21,24 @@ class TabItem extends StatelessWidget {
             title,
             overflow: TextOverflow.ellipsis,
           ),
-          count > 0
-              ? Container(
-                  margin: const EdgeInsetsDirectional.only(start: 5),
-                  padding: const EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    shape: BoxShape.circle,
+          if (count > 0)
+            Container(
+              margin: const EdgeInsetsDirectional.only(start: 5),
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  count > 9 ? "9+" : count.toString(),
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: Colors.black54,
+                    fontSize: 10,
                   ),
-                  child: Center(
-                    child: Text(
-                      count > 9 ? "9+" : count.toString(),
-                      style: const TextStyle(
-                        color: Colors.black54,
-                        fontSize: 10,
-                      ),
-                    ),
-                  ),
-                )
-              : const SizedBox(width: 0, height: 0),
+                ),
+              ),
+            ),
         ],
       ),
     );

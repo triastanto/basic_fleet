@@ -6,6 +6,7 @@ class AgendaInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       height: 55,
       decoration: ShapeDecoration(
@@ -18,10 +19,7 @@ class AgendaInput extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Agenda Perjalanan',
-          hintStyle: const TextStyle(
-            color: Colors.black,
-            fontSize: 14,
-            fontFamily: 'Poppins',
+          hintStyle: theme.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.w400,
           ),
           prefixIcon: Padding(

@@ -5,7 +5,7 @@ class BasicFleetTheme {
   static TextTheme lightTextTheme = TextTheme(
     bodyLarge: GoogleFonts.poppins(
       fontSize: 14.0,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w400,
       color: Colors.black,
     ),
     displayLarge: GoogleFonts.poppins(

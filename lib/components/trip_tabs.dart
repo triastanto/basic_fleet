@@ -22,7 +22,7 @@ class TripTabs extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 150,
+          height: 100,
           child: TabBarView(
             controller: tabController,
             children: const [

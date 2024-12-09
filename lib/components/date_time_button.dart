@@ -1,26 +1,53 @@
 import 'package:flutter/material.dart';
 
 class DateTimeButton extends StatefulWidget {
-  const DateTimeButton({super.key});
+  final String placeholder;
+
+  const DateTimeButton({
+    super.key,
+    this.placeholder = 'Pilih Tanggal & Waktu', 
+    });
 
   @override
   State<StatefulWidget> createState() => DateTimeButtonState();
 }
 
 class DateTimeButtonState extends State<DateTimeButton> {
-  DateTime dateTime = DateTime(2024, 01, 16, 5, 30);
+  DateTime? dateTime;
 
   @override
   Widget build(BuildContext context) {
-    final day = dateTime.day.toString().padLeft(2, '0');
-    final month = dateTime.month.toString().padLeft(2, '0');
-    final hours = dateTime.hour.toString().padLeft(2, '0');
-    final minutes = dateTime.minute.toString().padLeft(2, '0');
+    final String displayText;
+    
+    if (dateTime != null) {
+      final day = dateTime!.day.toString().padLeft(2, '0');
+      final month = dateTime!.month.toString().padLeft(2, '0');
+      final hours = dateTime!.hour.toString().padLeft(2, '0');
+      final minutes = dateTime!.minute.toString().padLeft(2, '0');
+      displayText = '$day/$month/${dateTime!.year} $hours:$minutes';
+    } else {
+      displayText = widget.placeholder;
+    }
 
-    return ElevatedButton(
-      onPressed: pickDateTime,
-      child: Text(
-        '$day/$month/${dateTime.year} $hours:$minutes',
+    return SizedBox(
+      height: 25,
+      child: ElevatedButton(
+        onPressed: pickDateTime,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            displayText,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+        ),
       ),
     );
   }
@@ -34,8 +61,8 @@ class DateTimeButtonState extends State<DateTimeButton> {
   Future<TimeOfDay?> pickTime() => showTimePicker(
     context: context,
     initialTime: TimeOfDay(
-      hour: dateTime.hour,
-      minute: dateTime.minute,
+      hour: dateTime?.hour ?? 0,
+      minute: dateTime?.minute ?? 0,
     ),
   );
 
@@ -46,7 +73,7 @@ class DateTimeButtonState extends State<DateTimeButton> {
     TimeOfDay? time = await pickTime();
     if (time == null) return;
 
-    final dateTime = DateTime(
+    final newDateTime = DateTime(
       date.year,
       date.month,
       date.day,
@@ -54,6 +81,6 @@ class DateTimeButtonState extends State<DateTimeButton> {
       time.minute,
     );
 
-    setState(() => this.dateTime = dateTime);
+    setState(() => dateTime = newDateTime);
   }
 }

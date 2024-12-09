@@ -27,7 +27,7 @@ class SingleTripTab extends StatelessWidget {
             const Expanded(
               child: Column(
                 children: [
-                  Expanded(child: DateTimeButton()),
+                  Expanded(child: DateTimeButton(placeholder: 'Waktu Berangkat')),
                 ],
               ),
             ),

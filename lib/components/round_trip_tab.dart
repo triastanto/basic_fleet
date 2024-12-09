@@ -24,9 +24,9 @@ class RoundTripTab extends StatelessWidget {
           const Expanded(
             child: Column(
               children: [
-                Expanded(child: DateTimeButton()),
+                Expanded(child: DateTimeButton(placeholder: 'Waktu Berangkat')),
                 Divider(height: 1, color: Color(0xFFD9D9D9)),
-                Expanded(child: DateTimeButton()),
+                Expanded(child: DateTimeButton(placeholder: 'Waktu Pulang')),
               ],
             ),
           ),
